@@ -1,4 +1,4 @@
-## Entrega 3 Fernando Martinez
+## Entregable 3 Fernando Martinez
 
 El objetivo de este entregable es que el script de la segunda entrega corra en un conteiner de Docke y
 esté embebido en un DAG de Airflow dentro del container.
@@ -33,7 +33,3 @@ esté embebido en un DAG de Airflow dentro del container.
 
 ![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/fea02092-6b16-4abf-a776-c5740b49318e)
 ![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/fdfe12e0-5ade-4b4a-80f5-e23fc5b742ca)
-
-
-   
-10) 
