@@ -5,9 +5,7 @@ esté embebido en un DAG de Airflow dentro del container.
 
 1) Como primer paso obtenemos la siguiente imagen de Docker Hub a nuestra máquina local (https://hub.docker.com/r/puckel/docker-airflow) mediante el comando **docker pull puckel/docker-airflow** 
 
-2) Creo la carpeta DAG dentro del disco C:. Allí guardo el script de la segunda entrega con el nombre covid_data_dag.py
-
-![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/a1e31afa-3d76-4de0-9e87-e3e1b032df78)
+2) Creo la carpeta DAG dentro del repositorio. Allí guardo el script de la segunda entrega con el nombre covid_data_dag.py. Las modificaciones que se le hizo a este script fue editarlo para crear distintas tareas a ejecutarse en AIRFLOW.
 
 3) Creo el Dockerfile con el siguiente script
 
@@ -15,11 +13,11 @@ esté embebido en un DAG de Airflow dentro del container.
 
 4) Creo el container con el comando **docker build -t imagen1 .**
 
-![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/d850f007-12e6-406d-a650-96a444288e42)
+![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/d3495506-1982-4f35-80e7-9f781823907b)
 
 5) Corro el container con el comando **docker run -d -p 8080:8080 imagen1**
 
-![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/c7a1c8b8-1eb1-457d-9b44-c7e6a1817585)
+![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/7815c98c-399a-4615-a758-d5c6fb325dcd)
 
 6) Entro al puerto 8080, accedo a Airflow y ejecuto el DAG
    
@@ -27,9 +25,5 @@ esté embebido en un DAG de Airflow dentro del container.
 
 7) En la vista de (Tree View) vemos como viene la ejecución del DAG
 
-![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/f5883190-25a8-40e2-a45d-f94c188aa99b)
+![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/124d9a20-e2ae-4ece-8bab-fa38f588c255)
 
-8) Accedo al log para ver la correcta ejecución del script. Aquí podemos observar como se fueron ejecutando todos los pasos del script covid_data_dag.py
-
-![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/fea02092-6b16-4abf-a776-c5740b49318e)
-![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/fdfe12e0-5ade-4b4a-80f5-e23fc5b742ca)
