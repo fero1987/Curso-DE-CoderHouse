@@ -5,9 +5,9 @@ esté embebido en un DAG de Airflow dentro del container.
 
 1) Como primer paso obtenemos la siguiente imagen de Docker Hub a nuestra máquina local (https://hub.docker.com/r/puckel/docker-airflow) mediante el comando **docker pull puckel/docker-airflow** 
 
-2) Creo la carpeta "dag" dentro del repositorio. Allí guardo el script de la segunda entrega con el nombre covid_data_dag.py. Las modificaciones que se le hizo a este script fue editarlo para crear distintas tareas a ejecutarse en AIRFLOW.
+2) Creo la carpeta "dag" dentro del repositorio. Allí guardo el script de la segunda entrega con el nombre covid_data_dag.py. Las modificaciones que se le hicieron a este script fue para crear distintas tareas a ejecutarse en AIRFLOW.
 
-3) Creo el Dockerfile con el siguiente script
+3) Creo el Dockerfile con el siguiente script.
 
 ![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/0a64e789-2cc6-4093-9413-4e9961fb3604)
 
@@ -19,11 +19,12 @@ esté embebido en un DAG de Airflow dentro del container.
 
 ![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/7815c98c-399a-4615-a758-d5c6fb325dcd)
 
-6) Entro al puerto 8080, accedo a Airflow y ejecuto el DAG
+6) Entro al puerto 8080, accedo a Airflow y ejecuto el DAG.
    
 ![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/39446052-4d3e-4b1a-8612-b2e3485fa90b)
 
-7) En la vista de (Tree View) vemos como viene la ejecución del DAG
+7) En la vista de (Tree View) vemos como viene la ejecución del DAG.
 
 ![image](https://github.com/fero1987/Curso-DE-CoderHouse/assets/50931047/124d9a20-e2ae-4ece-8bab-fa38f588c255)
 
+8) Vemos que se han ejecutado todas las tareas con éxito.
