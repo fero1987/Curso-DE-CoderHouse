@@ -5,7 +5,7 @@ esté embebido en un DAG de Airflow dentro del container.
 
 1) Como primer paso obtenemos la siguiente imagen de Docker Hub a nuestra máquina local (https://hub.docker.com/r/puckel/docker-airflow) mediante el comando **docker pull puckel/docker-airflow** 
 
-2) Creo la carpeta DAG dentro del repositorio. Allí guardo el script de la segunda entrega con el nombre covid_data_dag.py. Las modificaciones que se le hizo a este script fue editarlo para crear distintas tareas a ejecutarse en AIRFLOW.
+2) Creo la carpeta "dag" dentro del repositorio. Allí guardo el script de la segunda entrega con el nombre covid_data_dag.py. Las modificaciones que se le hizo a este script fue editarlo para crear distintas tareas a ejecutarse en AIRFLOW.
 
 3) Creo el Dockerfile con el siguiente script
 
