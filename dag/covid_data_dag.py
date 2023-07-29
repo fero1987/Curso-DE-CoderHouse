@@ -114,7 +114,7 @@ def remove_duplicates_from_redshift(**kwargs):
     port = 5439
     database = 'data-engineer-database'
     user = 'fgmartinez87_coderhouse'
-    password = '7c92hMs3M1'  # Ver contraseña en la entrega
+    password = # Ver contraseña en la entrega
 
     conn = psycopg2.connect(
         host=host,
