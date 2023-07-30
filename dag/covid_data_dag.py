@@ -50,9 +50,6 @@ def process_covid_data(**kwargs):
     df_cleaned = df_cleaned.replace({0: np.nan, 'None': np.nan, None: np.nan})
     df_cleaned = df_cleaned.dropna(how='all', subset=columns_to_check)
 
-    # Eliminar duplicados del DataFrame
-    df_cleaned = df_cleaned.drop_duplicates()
-
     # Guardar el DataFrame limpio como variable XCom para usarlo en otra tarea
     ti.xcom_push(key='cleaned_df', value=df_cleaned)
 
