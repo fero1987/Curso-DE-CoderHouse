@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 import requests
+import os
 import json
 import pandas as pd
 import psycopg2
@@ -21,12 +22,19 @@ def get_covid_data():
     url = 'https://api.covidtracking.com/v1/us/daily.json'
     response = requests.get(url)
     data = response.json()
-    return data
+
+    # Guardar los datos en un archivo JSON en la carpeta 'data'
+    file_path = '/usr/local/airflow/data/covid_data.json'
+    with open(file_path, 'w') as file:
+        json.dump(data, file)
 
 # Definir la función para procesar los datos y crear el DataFrame limpio
 def process_covid_data(**kwargs):
     ti = kwargs['ti']
-    data = ti.xcom_pull(task_ids='get_covid_data_task')
+    # Leer los datos desde el archivo JSON en la carpeta 'data'
+    file_path = '/usr/local/airflow/data/covid_data.json'
+    with open(file_path, 'r') as file:
+        data = json.load(file)
     columnas = ['date', 'positive', 'death', 'positiveIncrease', 'deathIncrease', 'totalTestResults', 'hospitalizedCurrently', 'recovered', 'total', 'totalTestResultsIncrease']
     datos = [{columna: registro[columna] for columna in columnas if columna in registro} for registro in data]
     df = pd.DataFrame(datos)
@@ -73,7 +81,7 @@ def insert_into_redshift(**kwargs):
     port = 5439
     database = 'data-engineer-database'
     user = 'fgmartinez87_coderhouse'
-    password =  # Ver contraseña en la entrega
+    password = '7c92hMs3M1'  # Ver contraseña en la entrega
 
     conn = psycopg2.connect(
         host=host,
@@ -118,7 +126,7 @@ def remove_duplicates_from_redshift(**kwargs):
     port = 5439
     database = 'data-engineer-database'
     user = 'fgmartinez87_coderhouse'
-    password = # Ver contraseña en la entrega
+    password = '7c92hMs3M1'  # Ver contraseña en la entrega
 
     conn = psycopg2.connect(
         host=host,
