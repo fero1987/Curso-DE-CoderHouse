@@ -7,7 +7,7 @@ import pandas as pd
 import psycopg2
 import numpy as np
 
-# Defin argumentos del DAG
+# Definir argumentos del DAG
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -50,23 +50,30 @@ def process_covid_data(**kwargs):
     df_cleaned = df_cleaned.replace({0: np.nan, 'None': np.nan, None: np.nan})
     df_cleaned = df_cleaned.dropna(how='all', subset=columns_to_check)
 
-    # Guardar el DataFrame limpio como variable XCom para usarlo en otra tarea
-    ti.xcom_push(key='cleaned_df', value=df_cleaned)
+    # Guardar el DataFrame limpio en un archivo CSV
+    file_path = '/usr/local/airflow/data/covid_data_cleaned.csv'
+    df_cleaned.to_csv(file_path, index=False)
+
+    # Devolver la ruta del archivo CSV para pasarlo a la siguiente tarea
+    return file_path
 
 # Definir la función para insertar los datos en la tabla de Redshift
 def insert_into_redshift(**kwargs):
     ti = kwargs['ti']
-    df_cleaned = ti.xcom_pull(key='cleaned_df', task_ids='process_covid_data_task')
+    file_path = ti.xcom_pull(task_ids='process_covid_data_task')
 
-    if df_cleaned is None or df_cleaned.empty:
-        raise ValueError("DataFrame limpio no encontrado o vacío en XCom.")
+    if file_path is None:
+        raise ValueError("Archivo CSV no encontrado en XCom.")
+
+    # Leer el DataFrame limpio desde el archivo CSV
+    df_cleaned = pd.read_csv(file_path)
 
     # Conexión a Amazon Redshift
     host = 'data-engineer-cluster.cyhh5bfevlmn.us-east-1.redshift.amazonaws.com'
     port = 5439
     database = 'data-engineer-database'
     user = 'fgmartinez87_coderhouse'
-    password =  # Ver contraseña en la entrega
+    password = '7c92hMs3M1'  # Ver contraseña en la entrega
 
     conn = psycopg2.connect(
         host=host,
@@ -160,4 +167,4 @@ with DAG('covid_data_dag',
     )
 
     # Definir las dependencias entre tareas
-    get_covid_data_task >> process_covid_data_task >> insert_into_redshift_task >> remove_duplicates_from_redshift_task 
+    get_covid_data_task >> process_covid_data_task >> insert_into_redshift_task >> remove_duplicates_from_redshift_task
